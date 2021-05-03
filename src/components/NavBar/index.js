@@ -4,28 +4,32 @@ import Missions from '../Missions';
 import Mission from '../Mission';
 import Ships from '../Ships';
 import Ship from '../Ship';
-import "./styles.css";
+import styles from './styles'
+import { withStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Grid } from "@material-ui/core";
 import logo from '../../images/logo.png';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-const NavBar =() => {
+const NavBar =(props) => {
+  const {
+		classes,
+	  } = props;
   return (
     <Router>
-      <Grid style={{position: "relative"}}>
+      <Grid style={{position: "relative" }} >
         <Grid style={{zIndex: 500, position: "sticky" }}>
-          <AppBar color="transparent">
+          <AppBar color="transparent" >
             <Toolbar>
               <Grid item >
-                <img src={logo} className="img" alt="logo" />
+                <img src={logo} className={classes.img} alt="logo" />
               </Grid>
-              <Link to='/' className="navItems">
+              <Link to='/' className={classes.navItems}>
                 Home
               </Link>
-              <Link to='/missions' className="navItems">
+              <Link to='/missions' className={classes.navItems}>
                 Missions
               </Link>
-              <Link to='/ships' className="navItems">
+              <Link to='/ships' className={classes.navItems}>
                 Ships
               </Link>
             </Toolbar>
@@ -46,4 +50,4 @@ const NavBar =() => {
   );
 }
 
-export default NavBar;
+export default withStyles(styles)(NavBar);

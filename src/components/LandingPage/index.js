@@ -7,22 +7,25 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import GET_COMPANYDATA from "../../queries/getCompanyData"
-import "./styles.css"
+import styles from './styles'
+import { withStyles } from '@material-ui/core/styles'
 
-const LandingPage =() => {
+const LandingPage =(props) => {
 	const { data } = useQuery(GET_COMPANYDATA);
-
+	const {
+		classes,
+	  } = props
   return (
     <Grid item xs={12} container>
       {
         data &&
-				<Grid item xs={12} container justify="center" alignItems="center" className={"mainGrid"}>
+				<Grid item xs={12} container justify="center" alignItems="center" className={classes.mainGrid}>
 					<Grid item xs={11}>
 						<Grid item xs={6}> 
-							<Typography variant="h3" className={"title"}>
+							<Typography variant="h3" className={classes.title}>
 								{data.company.name}
 							</Typography>
-							<Typography variant="h6" className={"desc"}>
+							<Typography variant="h6" className={classes.desc}>
 								{data.company.summary}
 							</Typography>
 						</Grid>
@@ -31,10 +34,10 @@ const LandingPage =() => {
       }
 			{
 				data &&			
-				<Grid item xs={12} container justify="center" alignItems="center" className={"dataGrid"}>
+				<Grid item xs={12} container justify="center" alignItems="center" className={classes.dataGrid}>
 					 <Grid item xs={11}>
 							<Grid item xs={12}>
-								<Typography variant="h3" className="heading">Company Data</Typography>
+								<Typography variant="h3" className={classes.heading}>Company Data</Typography>
 							</Grid>
 							<Grid item container xs={12} justify="center">
 								<Grid item xs={8}>
@@ -42,28 +45,28 @@ const LandingPage =() => {
 										<Table>
 											<TableBody>
 												<TableRow>
-													<TableCell className="tableCell">Chief Executive Officer</TableCell>
-													<TableCell className="tableCell">{data.company.ceo}</TableCell>
+													<TableCell className={classes.tableCell}>Chief Executive Officer</TableCell>
+													<TableCell className={classes.tableCell}>{data.company.ceo}</TableCell>
 												</TableRow>
 												<TableRow>
-													<TableCell className="tableCell">COO</TableCell>
-													<TableCell className="tableCell">{data.company.coo}</TableCell>
+													<TableCell className={classes.tableCell}>COO</TableCell>
+													<TableCell className={classes.tableCell}>{data.company.coo}</TableCell>
 												</TableRow>
 												<TableRow>
-													<TableCell className="tableCell">CTO</TableCell>
-													<TableCell className="tableCell">{data.company.cto}</TableCell>
+													<TableCell className={classes.tableCell}>CTO</TableCell>
+													<TableCell className={classes.tableCell}>{data.company.cto}</TableCell>
 												</TableRow>
 												<TableRow>
-													<TableCell className="tableCell">Founder</TableCell>
-													<TableCell className="tableCell">{data.company.founder}</TableCell>
+													<TableCell className={classes.tableCell}>Founder</TableCell>
+													<TableCell className={classes.tableCell}>{data.company.founder}</TableCell>
 												</TableRow>
 												<TableRow>
-													<TableCell className="tableCell">Founded</TableCell>
-													<TableCell className="tableCell">{data.company.founded}</TableCell>
+													<TableCell className={classes.tableCell}>Founded</TableCell>
+													<TableCell className={classes.tableCell}>{data.company.founded}</TableCell>
 												</TableRow>
 												<TableRow>	
-													<TableCell className="tableCell">Headquarter's Address</TableCell>
-													<TableCell className="tableCell">{data.company.headquarters.address} {data.company.headquarters.city}, {data.company.headquarters.state}</TableCell>
+													<TableCell className={classes.tableCell}>Headquarter's Address</TableCell>
+													<TableCell className={classes.tableCell}>{data.company.headquarters.address} {data.company.headquarters.city}, {data.company.headquarters.state}</TableCell>
 												</TableRow>
 											</TableBody>
 										</Table>
@@ -77,4 +80,4 @@ const LandingPage =() => {
   );
 }
 
-export default LandingPage;
+export default withStyles(styles)(LandingPage);
