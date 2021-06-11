@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { Grid } from '@material-ui/core';
 import MUIDataTable from "mui-datatables";
 import GET_SHIPS from "../../queries/getShips"
+import { useHistory } from "react-router-dom";
 
 const Ships =() => {
   const columns = [
@@ -41,13 +42,11 @@ const Ships =() => {
      },
    ];
   const { data } = useQuery(GET_SHIPS);
-  const redirectToShip = (id) => {
-    window.location.href = `/ship/?id=${id}`;
-  }
-
+  const history = useHistory();
+  
   const options = {
     filterType: 'checkbox',
-    onRowClick: (rowData) => redirectToShip(rowData[0]),
+    onRowClick: (rowData) => history.push(`/ship/?id=${rowData[0]}`),
   };
   return (
     <Grid item container xs={12} className="misMain" justify="center" >

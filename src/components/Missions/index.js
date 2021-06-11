@@ -4,6 +4,7 @@ import { Grid, Typography } from '@material-ui/core';
 import MUIDataTable from "mui-datatables";
 import { useQuery } from "@apollo/client";
 import GET_MISSIONS from "../../queries/getMissions"
+import { useHistory } from "react-router-dom";
 
 const Missions =() => {
   const columns = [
@@ -52,12 +53,10 @@ const Missions =() => {
     },
    ];
   const { data } = useQuery(GET_MISSIONS);
-  const redirectToMission = (id) => {
-    window.location.href = `/mission/?id=${id}`;
-  }
+  const history = useHistory();
   const options = {
     filterType: 'checkbox',
-    onRowClick: (rowData) => redirectToMission(rowData[0]),
+    onRowClick: (rowData) => history.push(`/mission/?id=${rowData[0]}`),
   };
   return (
     <Grid item container xs={12} className="misMain" justify="center" >
