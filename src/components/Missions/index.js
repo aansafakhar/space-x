@@ -1,12 +1,17 @@
 import React from 'react';
-import "./styles.css"
 import { Grid, Typography } from '@material-ui/core';
 import MUIDataTable from "mui-datatables";
 import { useQuery } from "@apollo/client";
 import GET_MISSIONS from "../../queries/getMissions"
 import { useHistory } from "react-router-dom";
+import styles from './styles'
+import { withStyles } from '@material-ui/core/styles'
 
-const Missions =() => {
+const Missions =(props) => {
+  const {
+		classes,
+	} = props
+  
   const columns = [
     {
      name: "id",
@@ -59,8 +64,8 @@ const Missions =() => {
     onRowClick: (rowData) => history.push(`/mission/?id=${rowData[0]}`),
   };
   return (
-    <Grid item container xs={12} className="misMain" justify="center" >
-      <Grid item container xs={10} justify="center" className="tableGrid" alignItems="flex-start">
+    <Grid item container xs={12} className={classes.misMain} justify="center" >
+      <Grid item container xs={10} justify="center" className={classes.tableGrid} alignItems="flex-start">
       {data && (
         <MUIDataTable
         title={"Missions"}
@@ -74,4 +79,4 @@ const Missions =() => {
   );
 }
 
-export default Missions;
+export default withStyles(styles)(Missions);

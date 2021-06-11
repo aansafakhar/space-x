@@ -1,11 +1,15 @@
 import React from 'react';
-import "./styles.css"
 import { useQuery } from "@apollo/client";
 import { Grid, Typography } from '@material-ui/core';
 import GET_SHIP from "../../queries/getShip"
 import MUIDataTable from "mui-datatables";
+import styles from './styles';
+import { withStyles } from '@material-ui/core/styles'
 
-const Ship =() => {
+const Ship =(props) => {
+  const {
+		classes,
+	  } = props;
   const columns = [
     {
      name: "flight",
@@ -23,11 +27,11 @@ const Ship =() => {
     },
   });
   return (
-    <Grid item container xs={12} className="misMain" justify="center" >
+    <Grid item container xs={12} className={classes.misMain} justify="center" >
       <Grid item xs={12}>
 			{
         data &&
-        <Typography variant="h3" className="heading">{data.ship.name}</Typography>
+        <Typography variant="h3" className={classes.heading}>{data.ship.name}</Typography>
       }
 			</Grid>
       <Grid item container xs={12} justify="center">
@@ -46,4 +50,4 @@ const Ship =() => {
   );
 }
 
-export default Ship;
+export default withStyles(styles)(Ship);
